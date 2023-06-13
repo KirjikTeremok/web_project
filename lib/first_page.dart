@@ -84,9 +84,16 @@ class _FirstPageState extends State<FirstPage> {
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
                 if (!snapshot.hasData) return (const Text('пусто'));
                 return ListView.builder(
+
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return TrueInformationCardWidget(textCard: textCard, hitsCount: splitString((snapshot.data?.docs[index].get('ponts'))));
+
+                    return TrueInformationCardWidget(
+                      hitsCount: snapshot.data?.docs[index].get('points'),
+                      textCard: textCard,
+                      
+                        );
+                    //TrueInformationCardWidget(textCard: textCard, hitsCount: splitString((snapshot.data?.docs[index].get('ponts'))));
 
                   },
                 );

@@ -15,6 +15,7 @@ class TrueInformationCardWidget extends StatefulWidget {
 }
 
 class _TrueInformationCardWidgetState extends State<TrueInformationCardWidget> {
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -30,11 +31,30 @@ class _TrueInformationCardWidgetState extends State<TrueInformationCardWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Процент попаданий', style: widget.textCard,), Text('${widget.hitsCount}'),],),
+                  Text('Процент попаданий', style: widget.textCard,), Text((int.parse(widget.hitsCount.toString().split(" ")[2])/int.parse(widget.hitsCount.toString().split(" ")[0])*100).toStringAsFixed(0)),],),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Процент попаданий', style: widget.textCard,), Text(''),],),
+                  Text('Процент попаданий трешек', style: widget.textCard,), Text((int.parse(widget.hitsCount.toString().split(" ")[3])/int.parse(widget.hitsCount.toString().split(" ")[1])*100).toStringAsFixed(0)),],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:[
+                  Text("Количество подборов", style: widget.textCard,), Text(widget.hitsCount.toString().split(" ")[4])
+                ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:[
+                  Text("Количество перехватов", style: widget.textCard,), Text(widget.hitsCount.toString().split(" ")[5])
+                ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:[
+                  Text("Количество блок-шотов", style: widget.textCard,), Text(widget.hitsCount.toString().split(" ")[6])
+                ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Процент очков', style: widget.textCard,), Text((int.parse(widget.hitsCount.toString().split(" ")[2]) - int.parse(widget.hitsCount.toString().split(" ")[3])*2 + int.parse(widget.hitsCount.toString().split(" ")[3]*3)).toStringAsFixed(0)),],),
 
             ],
           ),
