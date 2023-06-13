@@ -33,7 +33,7 @@ class _InformationCardState extends State<InformationCard> {
           width: 660,
           child: Card(
 
-            margin: const EdgeInsets.all(7),
+            margin: const EdgeInsets.all(8),
             color: Colors.orangeAccent,
             clipBehavior: Clip.hardEdge,
             child: InkWell(

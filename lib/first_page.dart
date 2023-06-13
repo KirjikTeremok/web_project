@@ -73,13 +73,14 @@ class _FirstPageState extends State<FirstPage> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const[
                 Decorationn(),
                 InformationCard(textCard: textCard),
                 Decorationn()
               ],
             ),
             StreamBuilder(
+
               stream: FirebaseFirestore.instance.collection('basket',).snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
                 if (!snapshot.hasData) return (const Text('пусто'));
@@ -88,11 +89,15 @@ class _FirstPageState extends State<FirstPage> {
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (BuildContext context, int index) {
 
-                    return TrueInformationCardWidget(
-                      hitsCount: snapshot.data?.docs[index].get('points'),
-                      textCard: textCard,
-                      
-                        );
+                    return Column(
+                      children: [
+                        TrueInformationCardWidget(
+                          hitsCount: snapshot.data?.docs[index].get('points'),
+                          textCard: textCard,
+
+                            ),
+                      ],
+                    );
                     //TrueInformationCardWidget(textCard: textCard, hitsCount: splitString((snapshot.data?.docs[index].get('ponts'))));
 
                   },
