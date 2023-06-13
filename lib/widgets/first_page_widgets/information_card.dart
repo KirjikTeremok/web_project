@@ -40,20 +40,10 @@ class _InformationCardState extends State<InformationCard> {
               splashColor: Colors.red.withAlpha(50),
               onTap: () {
                 if(_textController1.text!="" && _textController2.text!="" && _textController3.text!="" && _textController4.text!="" && _textController5.text!="" && _textController6.text!="" && _textController7.text!="") {
+                  String v = '${_textController1.text} ${_textController2.text} ${_textController3.text} ${_textController4.text} ${_textController5.text} ${_textController6.text} ${_textController7.text}';
                   FirebaseFirestore.instance.collection('basket').add(
-                      {'pointsCount': _textController1.text,});
-                  FirebaseFirestore.instance.collection('basket').add(
-                      {'pointsCount3': _textController2.text});
-                  FirebaseFirestore.instance.collection('basket').add(
-                      {'hitsCount': _textController3.text});
-                  FirebaseFirestore.instance.collection('basket').add(
-                      {'hitsCount3': _textController4.text});
-                  FirebaseFirestore.instance.collection('basket').add(
-                      {'reboundCount': _textController5.text});
-                  FirebaseFirestore.instance.collection('basket').add(
-                      {'interceptionCount': _textController6.text});
-                  FirebaseFirestore.instance.collection('basket').add(
-                      {'blockshotCount': _textController7.text});
+                      {'points': v,});
+
                   _textController1.text = "";
                   _textController2.text = "";
                   _textController3.text = "";

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:web_project/widgets/first_page_widgets/decorations_widget.dart';
 import 'package:web_project/widgets/first_page_widgets/information_card.dart';
 import 'package:web_project/widgets/first_page_widgets/settings_button_widget.dart';
 import 'package:web_project/widgets/first_page_widgets/true_information_card_widget.dart';
@@ -70,7 +71,14 @@ class _FirstPageState extends State<FirstPage> {
 
         body: TabBarView(
           children: [
-            const InformationCard(textCard: textCard),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Decorationn(),
+                InformationCard(textCard: textCard),
+                Decorationn()
+              ],
+            ),
             StreamBuilder(
               stream: FirebaseFirestore.instance.collection('basket',).snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
@@ -78,7 +86,7 @@ class _FirstPageState extends State<FirstPage> {
                 return ListView.builder(
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return TrueInformationCardWidget(textCard: textCard, hitsPercentage: getLatestPointsAll('hitsCount'));
+                    return TrueInformationCardWidget(textCard: textCard, hitsCount: splitString((snapshot.data?.docs[index].get('ponts'))));
 
                   },
                 );
@@ -91,18 +99,7 @@ class _FirstPageState extends State<FirstPage> {
   }
 }
 
-
-Future<int> getLatestPointsAll(String nameKey) async {
-  final snapshot = await FirebaseFirestore.instance
-      .collection('basket')
-      .orderBy('timestamp', descending: true)
-      .limit(1)
-      .get();
-  if (snapshot.docs.isEmpty) {
-    // handle if no documents are found
-    return 0;
-  }
-  return snapshot.docs.first.data()[nameKey];
+List<String> splitString(String str) {
+  List<String> substrings = str.split(' ');
+  return substrings;
 }
-
-
